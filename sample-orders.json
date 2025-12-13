@@ -1,0 +1,124 @@
+[
+  {
+    "name": "US Order - Should route to F-US",
+    "order": {
+      "id": "order_001",
+      "order_number": "TEST-001",
+      "presentment_currency": "USD",
+      "line_items": [
+        {
+          "sku": "US-STARTER-001",
+          "quantity": 1,
+          "title": "US Starter Kit (MOCK)"
+        }
+      ],
+      "shipping_address": {
+        "country": "US",
+        "province": "CA",
+        "city": "Los Angeles"
+      }
+    },
+    "expected_partner": "F-US",
+    "expected_reason": "us_order"
+  },
+  {
+    "name": "F3 Refill - Should route to F3",
+    "order": {
+      "id": "order_002",
+      "order_number": "TEST-002",
+      "presentment_currency": "GBP",
+      "line_items": [
+        {
+          "sku": "REFILL-001",
+          "quantity": 1,
+          "title": "Mock Refill Product"
+        }
+      ],
+      "shipping_address": {
+        "country": "GB",
+        "city": "London"
+      }
+    },
+    "expected_partner": "F3",
+    "expected_reason": "refill_sku"
+  },
+  {
+    "name": "Multi-item Order - Should route to F1",
+    "order": {
+      "id": "order_003",
+      "order_number": "TEST-003",
+      "presentment_currency": "GBP",
+      "line_items": [
+        {
+          "sku": "TRIGGER-001",
+          "quantity": 1,
+          "title": "Mock Trigger Bottle"
+        },
+        {
+          "sku": "CONC-001",
+          "quantity": 1,
+          "title": "Mock Concentrate"
+        }
+      ],
+      "shipping_address": {
+        "country": "GB",
+        "city": "Manchester"
+      }
+    },
+    "expected_partner": "F1",
+    "expected_reason": "multi_item"
+  },
+  {
+    "name": "Single UK Item - Should route to F2",
+    "order": {
+      "id": "order_004",
+      "order_number": "TEST-004",
+      "presentment_currency": "GBP",
+      "line_items": [
+        {
+          "sku": "TRIGGER-001",
+          "quantity": 1,
+          "title": "Mock Trigger Bottle"
+        }
+      ],
+      "shipping_address": {
+        "country": "GB",
+        "city": "Birmingham"
+      }
+    },
+    "expected_partner": "F2",
+    "expected_reason": "single_item_default"
+  },
+  {
+    "name": "High Quantity Order - Should trigger fraud detection",
+    "order": {
+      "id": "order_005",
+      "order_number": "TEST-005",
+      "presentment_currency": "GBP",
+      "line_items": [
+        {
+          "sku": "TRIGGER-001",
+          "quantity": 15,
+          "title": "Mock Trigger Bottle"
+        }
+      ],
+      "shipping_address": {
+        "country": "GB",
+        "city": "Edinburgh"
+      }
+    },
+    "expected_partner": "F1",
+    "expected_reason": "multi_item",
+    "should_flag_fraud": true
+  },
+  {
+    "name": "Invalid Order - Missing required fields",
+    "order": {
+      "id": "order_006",
+      "line_items": []
+    },
+    "expected_partner": "F1",
+    "expected_reason": "error_fallback",
+    "should_error": true
+  }
+]
