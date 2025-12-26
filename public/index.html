@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapFulfil - Order Routing Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📦 SnapFulfil Routing Service</h1>
+                <div class="status-indicator" id="statusIndicator">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Checking...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Section -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <h3>Uptime</h3>
+                    <p class="stat-value" id="uptime">--</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Service Status</h3>
+                    <p class="stat-value" id="serviceStatus">--</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Queued Orders</h3>
+                    <p class="stat-value" id="queuedOrders">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Partners</h3>
+                    <p class="stat-value" id="activePartners">0</p>
+                </div>
+            </section>
+
+            <!-- Two Column Layout -->
+            <div class="layout">
+                <!-- Left Column: Create Order Form -->
+                <section class="panel">
+                    <h2>📝 Create New Order</h2>
+                    <form id="orderForm" class="form">
+                        <div class="form-group">
+                            <label>Order ID</label>
+                            <input type="text" id="orderId" placeholder="ORD-12345" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>SKU</label>
+                            <select id="sku" required>
+                                <option value="">Select SKU</option>
+                                <option value="SKU-1">SKU-1</option>
+                                <option value="SKU-2">SKU-2</option>
+                                <option value="SKU-3">SKU-3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select id="country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="IN">India</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" id="quantity" placeholder="1" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Customer Email</label>
+                            <input type="email" id="email" placeholder="customer@example.com" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Order</button>
+                    </form>
+
+                    <!-- Messages -->
+                    <div id="successMessage" class="alert alert-success" style="display:none;"></div>
+                    <div id="errorMessage" class="alert alert-error" style="display:none;"></div>
+                </section>
+
+                <!-- Right Column: Partners & Orders -->
+                <section class="panel">
+                    <h2>🏢 Partner Network</h2>
+                    <div id="partnersContainer" class="partners-grid">
+                        <!-- Partners will be loaded here -->
+                    </div>
+
+                    <h2 style="margin-top: 30px;">📊 Recent Orders</h2>
+                    <div id="ordersContainer" class="orders-list">
+                        <p class="empty-state">No orders yet</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>SnapFulfil Routing Service © 2025 | Last Updated: <span id="lastUpdate">--:--</span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
